@@ -150,19 +150,6 @@ class DiagnosisController extends Controller
         return $result;
     }
 
-    public function getProbBatuGinjal()
-    {
-        $total = 1;
-        foreach (TemporaryFinal::where('disease_id', 11)->get() as $probKidney) {
-            $total = $total * $probKidney->probability;
-        }
-
-        foreach (Disease::where('id', 11)->get() as $data) {
-            $result = $total * $data->probability;
-        }
-        return $result;
-    }
-
     // hasil perhitungan probabilitas
     public function resultProbGagalGinjal($gagalGinjal)
     {
@@ -213,11 +200,6 @@ class DiagnosisController extends Controller
     {
         TemporaryFinal::where('disease_id', 10)->update(['results' => $infeksiSaluranKemih]);
     }
-
-    public function resultProbBatuGinjal($batuGinjal)
-    {
-        TemporaryFinal::where('disease_id', 11)->update(['results' => $batuGinjal]);
-    }
     // END:: hasil perhitungan probabilitas
 
     public function proccess(Request $request)
@@ -255,7 +237,6 @@ class DiagnosisController extends Controller
         $probNefritisInterstisial = $this->getProbNefritisInterstisial();
         $probSistitisInterstisialis = $this->getProbSistitisInterstisialis();
         $probInfeksiSaluranKemih = $this->getProbInfeksiGinjal();
-        $probBatuGinjal = $this->getProbBatuGinjal();
 
         $data = [
             'gagalGinjal' => $probGagalGinjal,
@@ -268,7 +249,6 @@ class DiagnosisController extends Controller
             'nefritisInterstisial' => $probNefritisInterstisial,
             'sistitisInterstisialis' => $probSistitisInterstisialis,
             'infeksiSaluranKemih' => $probInfeksiSaluranKemih,
-            'batuGinjal' => $probBatuGinjal,
         ];
 
         $totalProbability = array_sum($data);
@@ -283,7 +263,6 @@ class DiagnosisController extends Controller
         $nefritisInterstisial = $probNefritisInterstisial / $totalProbability;
         $sistitisInterstisialis = $probSistitisInterstisialis / $totalProbability;
         $infeksiSaluranKemih = $probInfeksiSaluranKemih / $totalProbability;
-        $batuGinjal = $probBatuGinjal / $totalProbability;
 
         $this->resultProbGagalGinjal($gagalGinjal);
         $this->resultProbKankerGinjal($kankerGinjal);
@@ -295,7 +274,6 @@ class DiagnosisController extends Controller
         $this->resultProbNefritisInterstisial($nefritisInterstisial);
         $this->resultProbSistitisInterstisialis($sistitisInterstisialis);
         $this->resultProbInfeksiSaluranKemih($infeksiSaluranKemih);
-        $this->resultProbBatuGinjal($batuGinjal);
 
 
         $diagnosisMax = DB::table('temporary_finals')

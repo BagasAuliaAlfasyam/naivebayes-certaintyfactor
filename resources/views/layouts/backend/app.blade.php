@@ -157,7 +157,7 @@
                     <div class="col-md-9">
                         <p><strong>Expert System</strong></p>
                         <p>
-                            Sistem Pakar diagnosa penyakit ginjal dengam menggunakan algoritma Bayes
+                            Sistem Pakar diagnosa penyakit Udang Vaname
                         </p>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                     <div class="d-flex align-items-center">
                         <img class="logo" src="{{ asset('assets/backend') }}/images/logo.png" alt="">
                         <div>
-                            <p class="m-0">&copy; {{ date('Y') }} Bagas Aulia Alfasyam</p>
+                            <p class="m-0">&copy; {{ date('Y') }} Al-Hilal Hamzi</p>
                             <p class="m-0">All rights reserved</p>
                         </div>
                     </div>
