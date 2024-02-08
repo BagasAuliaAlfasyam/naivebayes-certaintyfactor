@@ -38,7 +38,7 @@
                             <h5>Berikut adalah langkah-langkah untuk mengelola <code>dashboard</code> :</h5>
 
                             <h6>1. Halaman <code>dashboard</code>, memberitahukan bahwa <code>{{ Auth::user()->name }}</code>, sudah melakukan <code>{{ $consultations->count() }}</code> diagnosa didalam lab ini. </h6>
-                            <h6>2. Untuk melakukan diagnosa penyakit Udang Vaname terdapat dimenu <code>Diagnosis</code> dan bisa dipilih gejala yang anda rasakan.</h6>
+                            <h6>2. Untuk melakukan diagnosa penyakit Udang Vaname terdapat dimenu <code>Diagnosis</code> dan bisa dipilih gejala yang anda lihat.</h6>
                             <h6>3. Data hasil konsultasi anda akan tersimpan dengan aman dan bisa diakses kapanpun dan dimanapun.</h6>
                             <h6>4. Untuk melihat hasil konsultasi terdapat dimenu <code>Consultations</code> lihat detail sesuai tanggal konsultasi anda.</h6>
                             <h6>5. Untuk melakukan perubahan ketika terjadinya kesalahan dalam penulisan data diri ada bisa di klik <code>Settings -> Profile</code></h6>

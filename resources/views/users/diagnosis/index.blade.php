@@ -8,9 +8,9 @@
     <div class="col-md-12 mb-4">
         <div class="card text-left">
             <div class="card-body">
-                <h5 class="my-0">Berikut adalah gejala penyakit Udang Vaname yang bisa anda pilih sesuai gejala yang anda rasakan</h5><br>
+                <h5 class="my-0">Berikut adalah gejala penyakit Udang Vaname yang bisa anda pilih sesuai gejala yang anda lihat</h5><br>
                 <h5 class="my-0">Anda bisa klik <code>checkbox</code> atau <code>nama gejala yang dibawah ini</code></h5><br>
-                <h5 class="my-0">Klik <code>Submit</code> jika sudah memilih semua gejala yang anda rasakan</h5>
+                <h5 class="my-0">Klik <code>Submit</code> jika sudah memilih semua gejala yang anda lihat</h5>
             </div>
         </div>
     </div>

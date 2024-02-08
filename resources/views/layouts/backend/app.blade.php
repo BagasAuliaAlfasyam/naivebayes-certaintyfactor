@@ -86,10 +86,10 @@
                             <a class="nav-item-hold" href="/admin/rules"><i class="fas fa-hand-sparkles"></i><span class="nav-text">Rules</span></a>
                             <div class="triangle"></div>
                         </li>
-                        <li class="nav-item {{ Request::is('admin/posts') ? 'active' : '' }}" data-item="posts">
+                        {{-- <li class="nav-item {{ Request::is('admin/posts') ? 'active' : '' }}" data-item="posts">
                             <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-align-justify"></i><span class="nav-text">Posts</span></a>
                             <div class="triangle"></div>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}" data-item="settings">
                             <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-users-cog"></i><span class="nav-text">Settings</span></a>
                             <div class="triangle"></div>

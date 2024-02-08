@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            {{-- <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="card card-icon mb-4">
                     <div class="card-body text-center">
                         <i class="fas fa-copy text-primary" style="font-size: 30px;"></i>
@@ -64,7 +64,7 @@
                         <p class="text-primary text-24 line-height-1 m-0">{{ $posts->count() }}</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
