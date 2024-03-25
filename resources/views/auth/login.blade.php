@@ -8,11 +8,13 @@
                 <div class="col-lg">
                     <div class="p-4">
 
+                        <h1 class="text-24 text-center">Expert Systems </h1>
+                        <h1 class="mb-3 text-18 text-center"> Vaname Shrimps</h1>
                         <div class="auth-logo text-center mb-4">
                             <img src="{{ asset('assets/backend') }}/images/logo.png">
                         </div>
 
-                        <h1 class="mb-3 text-18">Sign In</h1>
+                        <h2 class="mb-3 text-18">Sign In</h2>
 
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
