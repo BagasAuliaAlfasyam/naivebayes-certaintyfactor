@@ -223,7 +223,20 @@ class RulesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-
+        DB::table('rules')->insert([
+            'disease_id' => '1',
+            'symptom_id' => '27',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('rules')->insert([
+            'disease_id' => '1',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P01 }}
 
         // Penyakit {{ P02 }}
@@ -442,6 +455,13 @@ class RulesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+        DB::table('rules')->insert([
+            'disease_id' => '2',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P02 }}
 
         // Penyakit {{ P03 }}
@@ -632,7 +652,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '3',
             'symptom_id' => '24',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -640,7 +660,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '3',
             'symptom_id' => '25',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -657,6 +677,13 @@ class RulesTableSeeder extends Seeder
             'disease_id' => '3',
             'symptom_id' => '27',
             'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('rules')->insert([
+            'disease_id' => '3',
+            'symptom_id' => '28',
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -738,7 +765,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '10',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -746,7 +773,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '11',
-            'probability' => 1.00,
+            'probability' => 0.00001,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -762,7 +789,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '13',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -770,7 +797,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '14',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -778,7 +805,7 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '15',
-            'probability' => 0.00001,
+            'probability' => 0.50,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -874,6 +901,14 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '4',
             'symptom_id' => '27',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('rules')->insert([
+            'disease_id' => '4',
+            'symptom_id' => '28',
             'probability' => 0.00001,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -1097,6 +1132,14 @@ class RulesTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+
+        DB::table('rules')->insert([
+            'disease_id' => '5',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P05 }}
 
         // Penyakit {{ P06 }}
@@ -1316,6 +1359,13 @@ class RulesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
+        DB::table('rules')->insert([
+            'disease_id' => '6',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P06 }}
 
         // Penyakit {{ P07 }}
@@ -1535,6 +1585,13 @@ class RulesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
+        DB::table('rules')->insert([
+            'disease_id' => '7',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P07 }}
 
         // Penyakit {{ P08 }}
@@ -1754,6 +1811,13 @@ class RulesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
+        DB::table('rules')->insert([
+            'disease_id' => '8',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P08 }}
 
         // Penyakit {{ P09 }}
@@ -1973,6 +2037,13 @@ class RulesTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
+        DB::table('rules')->insert([
+            'disease_id' => '9',
+            'symptom_id' => '28',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
         // END::Penyakit {{ P09 }}
 
         // Penyakit {{ P10 }}
@@ -2187,6 +2258,14 @@ class RulesTableSeeder extends Seeder
         DB::table('rules')->insert([
             'disease_id' => '10',
             'symptom_id' => '27',
+            'probability' => 0.00001,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('rules')->insert([
+            'disease_id' => '10',
+            'symptom_id' => '28',
             'probability' => 0.00001,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
