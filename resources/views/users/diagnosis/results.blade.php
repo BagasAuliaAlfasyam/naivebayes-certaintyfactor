@@ -85,16 +85,7 @@
                                     <td>{{ floor($diagnosa->results * 100) }}%</td>
                                 </tr>
                             @endforeach
-                            
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode</th>
-                                <th>Nama Penyakit</th>
-                                <th>Hasil Probabilitas</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
