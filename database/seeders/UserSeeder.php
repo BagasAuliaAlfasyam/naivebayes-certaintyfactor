@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
     {
         User::create([
             'role_id' => '1',
-            'name' => 'Bagas Aulia Alfasyam',
-            'username' => 'Bagason',
-            'email' => 'hi@bagas.com',
+            'name' => 'Al Hilal Hamzi',
+            'username' => 'hilal',
+            'email' => 'hi@hilal.com',
             'password' => bcrypt('admin')
         ]);
 
@@ -30,9 +30,9 @@ class UserSeeder extends Seeder
 
         User::create([
             'role_id' => '2',
-            'name' => 'Bagas Aulia Alfasyam',
-            'username' => 'BagasonUser',
-            'email' => 'bagas@gmail.com',
+            'name' => 'Al Hilal Hamzi',
+            'username' => 'HilalUser',
+            'email' => 'hilal@gmail.com',
             'password' => bcrypt('user'),
         ]);
 
