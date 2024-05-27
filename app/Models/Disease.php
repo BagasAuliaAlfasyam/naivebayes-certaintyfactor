@@ -12,4 +12,9 @@ class Disease extends Model
     {
         return $this->hasMany(Rule::class);
     }
+
+    public function imageDiseases()
+    {
+        return $this->hasMany(ImageDisease::class);
+    }
 }

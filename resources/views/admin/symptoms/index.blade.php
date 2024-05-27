@@ -11,7 +11,7 @@
         <h1>Gejala | </h1>
         <a href="/admin/symptoms/create" class="btn btn-primary btn-sm">Create</a>
     </div>
-    <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
+    <div class="separator-breadcrumb border-top"></div>
 
     <div class="row">
         <div class="col-md-12 mb-4">
@@ -42,18 +42,20 @@
                                         <td>{{ $symptom->created_at }}</td>
                                         <td>{{ $symptom->updated_at }}</td>
                                         <td>
-                                            <a href="/admin/symptoms/{{ $symptom->id }}/edit"
-                                                class="btn btn-primary btn-sm float-left mr-1">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                            <form action="/admin/symptoms/{{ $symptom->id }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Data gejala akan terhapus')">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="/admin/symptoms/{{ $symptom->id }}/edit"
+                                                    class="btn btn-primary btn-sm float-left mr-1">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                                <form action="/admin/symptoms/{{ $symptom->id }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Data gejala akan terhapus')">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

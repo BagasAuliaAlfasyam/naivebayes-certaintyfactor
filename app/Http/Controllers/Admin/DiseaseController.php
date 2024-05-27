@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Disease;
+use App\Models\ImageDisease;
 
 class DiseaseController extends Controller
 {
@@ -37,9 +38,23 @@ class DiseaseController extends Controller
             'appear' => 'required',
             'information' => 'required',
             'suggestion' => 'required',
+            'images.*' => 'mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Disease::create($request->all());
+        $disease = Disease::create($request->all());
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                $image->move(public_path('storage//images'), $imageName);
+
+                ImageDisease::create([
+                    'disease_id' => $disease->id,
+                    'image' => $imageName,
+                ]);
+            }
+        }
+
         return redirect('admin/diseases')->with('toast_success', 'Data Penyakit Berhasil Ditambahkan');
     }
 
@@ -71,16 +86,23 @@ class DiseaseController extends Controller
             'appear' => 'required',
             'information' => 'required',
             'suggestion' => 'required',
+            'images.*' => 'mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Disease::where('id', $id)->update([
-            'code' => $request->code,
-            'name' => $request->name,
-            'probability' => $request->probability,
-            'appear' => $request->appear,
-            'information' => $request->information,
-            'suggestion' => $request->suggestion,
-        ]);
+        $disease = Disease::find($id);
+        $disease->update($request->all());
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                $image->move(public_path('storage/images'), $imageName);
+
+                ImageDisease::create([
+                    'disease_id' => $disease->id,
+                    'image' => $imageName,
+                ]);
+            }
+        }
 
         return redirect('admin/diseases')->with('toast_success', 'Data Penyakit Berhasil Diubah');
     }
@@ -90,7 +112,26 @@ class DiseaseController extends Controller
      */
     public function destroy($id)
     {
-        Disease::destroy($id);
+        $disease = Disease::find($id);
+
+        if (!$disease) {
+            return redirect('/admin/diseases')->with('toast_error', 'Data tidak ditemukan');
+        }
+
+        $images = $disease->images;
+
+        if ($images) {
+            foreach ($images as $image) {
+                $imagePath = public_path('storage/images') . '/' . $image->filename;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+                $image->delete();
+            }
+        }
+
+        $disease->delete();
+
         return redirect('/admin/diseases')->with('toast_success', 'Data Berhasil Dihapus');
     }
 }

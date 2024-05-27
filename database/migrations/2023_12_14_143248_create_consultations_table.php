@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('disease');
             $table->double('score');
+            $table->double('cf_percentage');
             $table->text('information');
             $table->text('suggestion');
             $table->timestamps();

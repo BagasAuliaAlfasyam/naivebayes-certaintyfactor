@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('disease_id');
             $table->unsignedBigInteger('symptom_id');
             $table->double('probability');
+            $table->double('cf_pakar');
             $table->timestamps();
 
             $table

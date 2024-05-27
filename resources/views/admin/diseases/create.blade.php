@@ -14,7 +14,7 @@
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex flex-column">
-                    <form action="{{ route('admin.diseases.store') }}" method="post">
+                    <form action="{{ route('admin.diseases.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="code">Kode</label>
@@ -45,6 +45,11 @@
                             <label for="suggestion">Saran</label>
                             <textarea class="ckeditor" name="suggestion" id="suggestion" placeholder="Saran">{{ old('suggestion') }}</textarea>
                             @error('suggestion') <small class="form-text text-danger">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="images">Gambar</label>
+                            <input class="form-control @error('images') is-invalid @enderror" name="images[]" id="images" type="file" multiple>
+                            @error('images') <small class="form-text text-danger">{{ $message }}</small> @enderror
                         </div>
                         <button type="submit" class="btn btn-primary pd-x-20 mt-2">Create</button>
                     </form>

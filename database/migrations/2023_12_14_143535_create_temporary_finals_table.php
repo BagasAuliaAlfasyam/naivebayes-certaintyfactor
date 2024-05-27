@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('disease_id')->references('id')->on('diseases');
             $table->unsignedBigInteger('symptom_id');
             $table->double('probability');
+            $table->double('cf_gejala');
             $table->double('results');
             $table->timestamps();
         });

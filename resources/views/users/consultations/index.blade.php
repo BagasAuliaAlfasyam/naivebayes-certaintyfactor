@@ -24,7 +24,8 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Penyakit</th>
-                                <th>Nilai</th>
+                                <th>Nilai Naive Bayes</th>
+                                <th>Nilai Certainty Factor</th>
                                 <th>Tanggal Konsultasi</th>
                                 <th>Action</th>
                             </tr>
@@ -36,6 +37,7 @@
                                     <td>{{ $consultation->user->name }}</td>
                                     <td>{{ $consultation->disease }}</td>
                                     <td>{{ $consultation->score }}%</td>
+                                    <td>{{ $consultation->cf_percentage }}%</td>
                                     <td>{{ $consultation->created_at }}</td>
                                     <td>
                                         <a href="/users/consultations/{{ $consultation->id }}" class="btn btn-info btn-sm float-left mr-1">
