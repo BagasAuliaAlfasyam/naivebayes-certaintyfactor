@@ -48,12 +48,20 @@
                             @error('suggestion') <small class="form-text text-danger">{{ $message }}</small> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="image">Gambar</label>
-                            <input class="form-control @error('image') is-invalid @enderror" name="image" id="image" type="file">
-                            @if($disease->image)
-                                <img src="{{ asset('images/' . $disease->image) }}" alt="{{ $disease->name }}" style="width: 100px; height: 100px;">
+                            <label for="images">Gambar</label>
+                            <input class="form-control @error('images') is-invalid @enderror" name="images[]" id="images" type="file" multiple>
+                            @error('images') <small class="form-text text-danger">{{ $message }}</small> @enderror
+                        </div>
+                        <div class="form-group">
+                            @if($disease->imageDiseases)
+                                <div class="row">
+                                    @foreach($disease->imageDiseases as $image)
+                                        <div class="col-md-3">
+                                            <img src="{{ asset('storage/images/' . $image->filename) }}" alt="{{ $disease->name }}" class="img-thumbnail mb-2">
+                                        </div>
+                                    @endforeach
+                                </div>
                             @endif
-                            @error('image') <small class="form-text text-danger">{{ $message }}</small> @enderror
                         </div>
                         <button type="submit" class="btn btn-primary pd-x-20 mt-2">Update</button>
                     </form>

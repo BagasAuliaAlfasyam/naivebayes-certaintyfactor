@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('image_diseases', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('disease_id');
-            $table->string('image');
+            $table->string('filename');
             $table->timestamps();
             $table->foreign('disease_id')->references('id')->on('diseases')->constrained()->onDelete('cascade');
         });

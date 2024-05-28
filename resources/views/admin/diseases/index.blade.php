@@ -20,7 +20,8 @@
                     <h4 class="card-title mb-3">Data Penyakit</h4>
                     <p>Sistem pakar diagnosa penyakit ginjal</p>
                     <div class="table-responsive">
-                        <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
+                        <table class="display table table-striped table-bordered" id="zero_configuration_table"
+                            style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -41,28 +42,39 @@
                                         <td>{{ $disease->probability }}</td>
                                         <td>{{ $disease->appear }}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#imageModal{{ $disease->id }}">Show Image</button>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="imageModal{{ $disease->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $disease->id }}" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                            <button class="btn btn-info btn-sm" data-toggle="modal"
+                                                data-target="#imageModal{{ $disease->id }}">Show Image</button>
+                                            <div class="modal fade" id="imageModal{{ $disease->id }}" tabindex="-1"
+                                                aria-labelledby="imageModalLabel{{ $disease->id }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="imageModalLabel{{ $disease->id }}">Images for {{ $disease->name }}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <h5 class="modal-title"
+                                                                id="imageModalLabel{{ $disease->id }}">Images for
+                                                                {{ $disease->name }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            @if ($disease->images && $disease->images->count() > 0)
-                                                                @foreach ($disease->images as $image)
-                                                                    <img src="{{ asset('storage/images/' . $image->filename) }}" alt="Disease Image" class="img-thumbnail mb-2" style="width: 100%;">
-                                                                @endforeach
+                                                            @if ($disease->imageDiseases && $disease->imageDiseases->count() > 0)
+                                                                <div class="row">
+                                                                    @foreach ($disease->imageDiseases as $image)
+                                                                        <div class="col-md-4 mb-3">
+                                                                            <img src="{{ asset('storage/images/' . $image->filename) }}"
+                                                                                alt="Disease Image"
+                                                                                class="img-fluid img-thumbnail">
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
                                                             @else
                                                                 <p>No images available for this disease.</p>
                                                             @endif
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -70,13 +82,16 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('admin.diseases.edit', $disease->id) }}" class="btn btn-primary btn-sm mr-1">
+                                                <a href="{{ route('admin.diseases.edit', $disease->id) }}"
+                                                    class="btn btn-primary btn-sm mr-1">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin.diseases.destroy', $disease->id) }}" method="POST" id="deleteForm{{ $disease->id }}">
+                                                <form action="{{ route('admin.diseases.destroy', $disease->id) }}"
+                                                    method="POST" id="deleteForm{{ $disease->id }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $disease->id }})">
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="confirmDelete({{ $disease->id }})">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>

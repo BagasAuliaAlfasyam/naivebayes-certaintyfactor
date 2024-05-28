@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImageDisease extends Model
 {
-    use HasFactory;
-
-    protected $fillable = ['disease_id', 'image'];
+    protected $fillable = ['disease_id', 'filename'];
 
     public function disease()
     {

@@ -46,11 +46,11 @@ class DiseaseController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $imageName = time() . '-' . $image->getClientOriginalName();
-                $image->move(public_path('storage//images'), $imageName);
+                $image->move(public_path('storage/images'), $imageName);
 
                 ImageDisease::create([
                     'disease_id' => $disease->id,
-                    'image' => $imageName,
+                    'filename' => $imageName,
                 ]);
             }
         }
@@ -99,7 +99,7 @@ class DiseaseController extends Controller
 
                 ImageDisease::create([
                     'disease_id' => $disease->id,
-                    'image' => $imageName,
+                    'filename' => $imageName,
                 ]);
             }
         }
@@ -129,7 +129,6 @@ class DiseaseController extends Controller
                 $image->delete();
             }
         }
-
         $disease->delete();
 
         return redirect('/admin/diseases')->with('toast_success', 'Data Berhasil Dihapus');
