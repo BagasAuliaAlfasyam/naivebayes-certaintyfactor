@@ -38,12 +38,14 @@ class RuleController extends Controller
             'disease_id' => 'required',
             'symptom_id' => 'required',
             'probability' => 'required',
+            'cf_pakar' => 'required'
         ]);
 
         Rule::create([
             'disease_id' => $request->disease_id,
             'symptom_id' => $request->symptom_id,
-            'probability' => $request->probability
+            'probability' => $request->probability,
+            'cf_pakar' => $request->cf_pakar
         ]);
 
         return redirect('/admin/rules')->with('toast_success', 'Data Rule Berhasil Ditambahkan');
@@ -76,12 +78,14 @@ class RuleController extends Controller
             'disease_id' => 'required',
             'symptom_id' => 'required',
             'probability' => 'required',
+            'cf_pakar' => 'required'
         ]);
 
         Rule::where('id', $id)->update([
             'disease_id' => $request->disease_id,
             'symptom_id' => $request->symptom_id,
-            'probability' => $request->probability
+            'probability' => $request->probability,
+            'cf_pakar' => $request->cf_pakar
         ]);
 
         return redirect('/admin/rules')->with('toast_success', 'Data Rule Berhasil Ditambahkan');

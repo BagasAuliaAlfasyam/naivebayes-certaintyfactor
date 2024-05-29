@@ -28,6 +28,7 @@
                                     <th>Penyakit</th>
                                     <th>Gejala</th>
                                     <th>Probabilitas</th>
+                                    <th>CF Pakar</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $rule->disease->name }}</td>
                                         <td>{{ $rule->symptom->symptom }}</td>
+                                        <td>{{ $rule->cf_pakar }}</td>
                                         <td>{{ number_format($rule->probability, 2) }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
