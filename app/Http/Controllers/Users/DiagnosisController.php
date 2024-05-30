@@ -129,14 +129,26 @@ class DiagnosisController extends Controller
         ->limit(10)
         ->get();
 
-        $diagnosisMax = DB::table('temporary_finals')
-            ->join('diseases', 'temporary_finals.disease_id', '=', 'diseases.id')
-            ->select(['diseases.id', 'diseases.name', 'diseases.information', 'diseases.suggestion', 'temporary_finals.created_at',
-            DB::raw('MAX(temporary_finals.results) AS results'),
-            DB::raw('MAX(temporary_finals.cf_gejala) AS cf_gejala')])
-            ->groupBy('diseases.id', 'diseases.name', 'diseases.information', 'diseases.suggestion', 'temporary_finals.created_at')
-            ->orderByDesc('results')
-            ->first();
+        $diagnosisMax = Disease::with('imageDiseases')
+    ->join('temporary_finals', 'diseases.id', '=', 'temporary_finals.disease_id')
+    ->select([
+        'diseases.id',
+        'diseases.name',
+        'diseases.information',
+        'diseases.suggestion',
+        'temporary_finals.created_at',
+        DB::raw('MAX(temporary_finals.results) AS results'),
+        DB::raw('MAX(temporary_finals.cf_gejala) AS cf_gejala')
+    ])
+    ->groupBy([
+        'diseases.id',
+        'diseases.name',
+        'diseases.information',
+        'diseases.suggestion',
+        'temporary_finals.created_at'
+    ])
+    ->orderByDesc('results')
+    ->first();
 
         return view('users.diagnosis.results', compact('diagnosis', 'diagnosisMax'));
     }

@@ -83,12 +83,21 @@
 
         <div class="row mt-3">
             <div class="col">
-                <div class="card w-50 mb-2 mx-auto">
-                    <div class="card-body d-flex justify-content-center align-items-center">
-                        <div>
-                            <strong class="mr-1 mb-1">Gambar Penyakit</strong>
-                            <!-- Add your image or content here -->
-                        </div>
+                <div class="card mb-2 mx-auto">
+                    <div class="card-body text-center">
+                        <strong class="d-block mb-3">Gambar Penyakit {{ $diagnosisMax->disease }}</strong>
+                        @if ($diagnosisMax->imageDiseases->isNotEmpty())
+                        <div class="row">
+                            @foreach ($diagnosisMax->imageDiseases as $image)
+                                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                        <img src="{{ asset('storage/images/' . $image->filename) }}" alt="Disease Image"
+                                             class="img-fluid img-thumbnail w-100">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-center mt-4 text-danger"><strong>No images available for this disease.</strong></p>
+                        @endif
                     </div>
                 </div>
             </div>
