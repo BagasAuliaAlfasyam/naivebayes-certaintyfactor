@@ -3,6 +3,7 @@
 use Database\Seeders\UserSeeder;
 use Database\Seeders\RolesTableSeeder;
 use Database\Seeders\DiseasesTableSeeder;
+use Database\Seeders\ImageDiseaseSeeder;
 use Database\Seeders\SymtomsTableSeeder;
 use Database\Seeders\RulesTableSeeder;
 use Illuminate\Database\Seeder;
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DiseasesTableSeeder::class);
         $this->call(SymtomsTableSeeder::class);
         $this->call(RulesTableSeeder::class);
+        $this->call(ImageDiseaseSeeder::class);
     }
 }
