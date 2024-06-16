@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="breadcrumb">
-        <h1>Hasil Diagnosa | {{ Auth::user()->name }}</h1>
+        <h1>Detail Riwayat Konsultasi | {{ Auth::user()->name }}</h1>
     </div>
     <div class="separator-breadcrumb border-top"></div>
 

@@ -35,18 +35,26 @@ class RuleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'disease_id' => 'required',
-            'symptom_id' => 'required',
-            'probability' => 'required',
-            'cf_pakar' => 'required'
+            'disease_id' => 'required|exists:diseases,id',
+            'probability.*' => 'required|numeric|between:0,1',
+            'cf_pakar.*' => 'required|numeric|between:0,1',
         ]);
 
-        Rule::create([
-            'disease_id' => $request->disease_id,
-            'symptom_id' => $request->symptom_id,
-            'probability' => $request->probability,
-            'cf_pakar' => $request->cf_pakar
-        ]);
+        $diseaseId = $request->input('disease_id');
+        $probabilities = $request->input('probability');
+        $cfPakarValues = $request->input('cf_pakar');
+
+        foreach ($probabilities as $symptomId => $probability) {
+            $cfPakar = $cfPakarValues[$symptomId];
+
+            // Save the rule to the database
+            Rule::create([
+                'disease_id' => $diseaseId,
+                'symptom_id' => $symptomId,
+                'probability' => $probability,
+                'cf_pakar' => $cfPakar,
+            ]);
+        }
 
         return redirect('/admin/rules')->with('toast_success', 'Data Rule Berhasil Ditambahkan');
     }
@@ -75,20 +83,26 @@ class RuleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'disease_id' => 'required',
-            'symptom_id' => 'required',
-            'probability' => 'required',
-            'cf_pakar' => 'required'
+            'disease_id' => 'required|exists:diseases,id',
+            'probability.*' => 'required|numeric|between:0,1',
+            'cf_pakar.*' => 'required|numeric|between:0,1',
         ]);
 
-        Rule::where('id', $id)->update([
-            'disease_id' => $request->disease_id,
-            'symptom_id' => $request->symptom_id,
-            'probability' => $request->probability,
-            'cf_pakar' => $request->cf_pakar
-        ]);
+        $diseaseId = $request->input('disease_id');
+        $probabilities = $request->input('probability');
+        $cfPakarValues = $request->input('cf_pakar');
 
-        return redirect('/admin/rules')->with('toast_success', 'Data Rule Berhasil Ditambahkan');
+        foreach ($probabilities as $symptomId => $probability) {
+            $cfPakar = $cfPakarValues[$symptomId];
+
+            // Update the rule in the database
+            Rule::updateOrCreate(
+                ['disease_id' => $diseaseId, 'symptom_id' => $symptomId],
+                ['probability' => $probability, 'cf_pakar' => $cfPakar]
+            );
+        }
+
+        return redirect('/admin/rules')->with('toast_success', 'Data Rule Berhasil Diperbarui');
     }
 
     /**

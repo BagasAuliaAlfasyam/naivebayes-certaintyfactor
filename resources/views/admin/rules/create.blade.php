@@ -9,40 +9,58 @@
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
 
 <div class="row">
-    <div class="col-md-6">
-        <p>Tambah Data Rule</p>
+    <div class="col-md-12">
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex flex-column">
                     <form action="{{ route('admin.rules.store') }}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="diseases">Penyakit</label>
-                            <select class="form-control @error('disease_id') @enderror" id="diseases" name="disease_id">
-                                @foreach ($diseases as $disease)
-                                <option value="{{ $disease->id }}">{{ $disease->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('disease_id') <span class="text-danger">{{ $message }}</span> @enderror
+                        <!-- Disease Selection Card -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="disease">Penyakit</label>
+                                    <select class="form-control @error('disease_id') is-invalid @enderror" id="disease" name="disease_id">
+                                        <option value="">Pilih Penyakit</option>
+                                        @foreach ($diseases as $disease)
+                                            <option value="{{ $disease->id }}">{{ $disease->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('disease_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="symptoms">Gejala</label>
-                            <select class="form-control @error('symptom_id') @enderror" id="symptoms" name="symptom_id">
-                                @foreach ($symptoms as $symptom)
-                                <option value="{{ $symptom->id }}">{{ $symptom->symptom }}</option>
-                                @endforeach
-                            </select>
-                            @error('symptom_id') <span class="text-danger">{{ $message }}</span> @enderror
+                        <!-- Symptoms Cards Grid -->
+                        <div class="row">
+                            @foreach ($symptoms as $symptom)
+                                <div class="col-md-3 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $symptom->symptom }}</h5>
+                                            <div class="form-group">
+                                                <label for="probability_{{ $symptom->id }}">Probabilitas:</label>
+                                                <input type="text" class="form-control @error('probability.' . $symptom->id) is-invalid @enderror" id="probability_{{ $symptom->id }}" name="probability[{{ $symptom->id }}]">
+                                                @error('probability.' . $symptom->id)
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cf_pakar_{{ $symptom->id }}">CF Pakar:</label>
+                                                <input type="text" class="form-control @error('cf_pakar.' . $symptom->id) is-invalid @enderror" id="cf_pakar_{{ $symptom->id }}" name="cf_pakar[{{ $symptom->id }}]">
+                                                @error('cf_pakar.' . $symptom->id)
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
 
-                        <div class="form-group">
-                            <label for="probability">Probabilitas</label>
-                            <input type="text" class="form-control @error('probability') @enderror" id="probability" name="probability">
-                            @error('probability') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Create</button>
+                        <button type="submit" class="btn btn-primary pd-x-20 mt-3">Create</button>
                     </form>
                 </div>
             </div>

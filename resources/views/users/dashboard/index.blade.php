@@ -8,8 +8,7 @@
 <div class="breadcrumb">
     <h1>Dashboard</h1>
     <ul>
-        <li><a href="{{ url('admin/dashboard') }}">User</a></li>
-        <li>Dashboard</li>
+        <li><a href="{{ url('admin/dashboard') }}">{{ Auth::user()->name }}</a></li>
     </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->

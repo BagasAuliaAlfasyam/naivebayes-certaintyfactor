@@ -39,19 +39,20 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $rule->disease->name }}</td>
                                         <td>{{ $rule->symptom->symptom }}</td>
-                                        <td>{{ $rule->cf_pakar }}</td>
                                         <td>{{ number_format($rule->probability, 2) }}</td>
+                                        <td>{{ number_format($rule->cf_pakar, 2) }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="/admin/rules/{{ $rule->id }}/edit"
                                                     class="btn btn-primary btn-sm float-left mr-1">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <form action="/admin/rules/{{ $rule->id }}" method="post">
+                                                <form action="{{ route('admin.rules.destroy', $rule->id) }}"
+                                                    method="POST" id="deleteForm{{ $rule->id }}">
                                                     @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Data Rule akan terhapus')">
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="confirmDelete({{ $rule->id }})">
                                                         <i class="far fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -72,4 +73,23 @@
 @push('js')
     <script src="{{ asset('assets/backend') }}/js/plugins/datatables.min.js"></script>
     <script src="{{ asset('assets/backend') }}/js/scripts/datatables.script.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Konfirmasi Penghapusan',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm' + id).submit();
+                }
+            })
+        }
+    </script>
 @endpush
