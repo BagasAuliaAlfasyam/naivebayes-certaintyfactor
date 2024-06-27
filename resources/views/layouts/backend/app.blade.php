@@ -51,12 +51,12 @@
                                 <i class="fas fa-user"></i> {{ Auth::user()->name }}
                             </div>
                             @if (Request::is('admin*'))
-                            <a href="{{ url('admin/profile') }}" class="dropdown-item">Account settings</a>
+                            <a href="{{ url('admin/profile') }}" class="dropdown-item">Pengaturan Akun</a>
                             @else
-                            <a href="{{ url('users/profile') }}" class="dropdown-item">Account settings</a>
+                            <a href="{{ url('users/profile') }}" class="dropdown-item">Pengaturan Akun</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Sign out</a>
+                                                     document.getElementById('logout-form').submit();">Keluar</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
@@ -73,7 +73,7 @@
                     @if (Request::is('admin*'))
 
                         <li class="nav-item {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                            <a class="nav-item-hold active" href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i><span class="nav-text">Dashboard</span></a>
+                            <a class="nav-item-hold active" href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i><span class="nav-text">Beranda</span></a>
                             <div class="triangle"></div>
                         </li>
                         <li class="nav-item {{ Request::is('admin/symptoms') ? 'active' : '' }}">
@@ -85,7 +85,7 @@
                             <div class="triangle"></div>
                         </li>
                         <li class="nav-item {{ Request::is('admin/rules') ? 'active' : '' }}">
-                            <a class="nav-item-hold" href="/admin/rules"><i class="fas fa-hand-sparkles"></i><span class="nav-text">Rules</span></a>
+                            <a class="nav-item-hold" href="/admin/rules"><i class="fas fa-hand-sparkles"></i><span class="nav-text">Aturan</span></a>
                             <div class="triangle"></div>
                         </li>
                         {{-- <li class="nav-item {{ Request::is('admin/posts') ? 'active' : '' }}" data-item="posts">
@@ -93,7 +93,7 @@
                             <div class="triangle"></div>
                         </li> --}}
                         <li class="nav-item {{ Request::is('admin/settings') ? 'active' : '' }}" data-item="settings">
-                            <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-users-cog"></i><span class="nav-text">Settings</span></a>
+                            <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-users-cog"></i><span class="nav-text">Pengaturan</span></a>
                             <div class="triangle"></div>
                         </li>
 
@@ -101,7 +101,7 @@
 
                     @if (Request::is('users*'))
                         <li class="nav-item {{ Request::is('users/dashboard') ? 'active' : '' }}">
-                            <a class="nav-item-hold active" href="/users/dashboard"><i class="fas fa-tachometer-alt"></i><span class="nav-text">Dashboard</span></a>
+                            <a class="nav-item-hold active" href="/users/dashboard"><i class="fas fa-tachometer-alt"></i><span class="nav-text">Beranda</span></a>
                             <div class="triangle"></div>
                         </li>
                         <li class="nav-item {{ Request::is('users/diagnosis') ? 'active' : '' }}">
@@ -109,11 +109,11 @@
                             <div class="triangle"></div>
                         </li>
                         <li class="nav-item {{ Request::is('users/consultations') ? 'active' : '' }}">
-                            <a class="nav-item-hold" href="/users/consultations"><i class="fas fa-hospital-user"></i><span class="nav-text">Consultations</span></a>
+                            <a class="nav-item-hold" href="/users/consultations"><i class="fas fa-hospital-user"></i><span class="nav-text">Konsultasi</span></a>
                             <div class="triangle"></div>
                         </li>
                         <li class="nav-item {{ Request::is('users/settings') ? 'active' : '' }}" data-item="settingsUsers">
-                            <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-users-cog"></i><span class="nav-text">Settings</span></a>
+                            <a class="nav-item-hold" href="/admin/posts"><i class="fas fa-users-cog"></i><span class="nav-text">Pengaturan</span></a>
                             <div class="triangle"></div>
                         </li>
                     @endif
@@ -131,14 +131,14 @@
                 </ul>
 
                 <ul class="childNav" data-parent="settings">
-                    <li class="nav-item"><a href="/admin/profile"><i class="nav-icon far fa-user"></i><span class="item-name">Profile</span></a></li>
-                    <li class="nav-item"><a href="/admin/password"><i class="nav-icon fas fa-key"></i><span class="item-name">Password</span></a></li>
+                    <li class="nav-item"><a href="/admin/profile"><i class="nav-icon far fa-user"></i><span class="item-name">Profil</span></a></li>
+                    <li class="nav-item"><a href="/admin/password"><i class="nav-icon fas fa-key"></i><span class="item-name">Atur Kata Sandi</span></a></li>
                 </ul>
 
                 {{-- Submenu Users --}}
                 <ul class="childNav" data-parent="settingsUsers">
-                    <li class="nav-item"><a href="/users/profile"><i class="nav-icon far fa-user"></i><span class="item-name">Profile</span></a></li>
-                    <li class="nav-item"><a href="/users/password"><i class="nav-icon fas fa-key"></i><span class="item-name">Password</span></a></li>
+                    <li class="nav-item"><a href="/users/profile"><i class="nav-icon far fa-user"></i><span class="item-name">Profil</span></a></li>
+                    <li class="nav-item"><a href="/users/password"><i class="nav-icon fas fa-key"></i><span class="item-name">Atur Kata Sandi</span></a></li>
                 </ul>
 
             </div>
@@ -157,14 +157,14 @@
             <div class="app-footer">
                 <div class="row">
                     <div class="col-md-9">
-                        <p><strong>Expert System</strong></p>
+                        <p><strong>Sistem Pakar</strong></p>
                         <p>
                             Sistem Pakar diagnosa penyakit Udang Vaname
                         </p>
                     </div>
                 </div>
                 <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
-                    <a class="btn btn-primary text-white btn-rounded" href="{{ url('/') }}" target="_blank">Expert System</a>
+                    <a class="btn btn-primary text-white btn-rounded" href="{{ url('/') }}" target="_blank">Sistem Pakar</a>
                     <span class="flex-grow-1"></span>
                     <div class="d-flex align-items-center">
                         <img class="logo" src="{{ asset('assets/backend') }}/images/logo.png" alt="">

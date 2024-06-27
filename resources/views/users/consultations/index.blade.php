@@ -1,12 +1,12 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Users | Dashboard')
+@section('title', 'Users | Riwayat Konsultasi')
 
 @section('content')
 
     <!-- ============ Body content start ============= -->
 <div class="breadcrumb">
-    <h1>Dashboard</h1>
+    <h1>Riwayat Konsultasi</h1>
 </div>
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
 
@@ -27,7 +27,7 @@
                                 <th>Nilai Naive Bayes</th>
                                 <th>Nilai Certainty Factor</th>
                                 <th>Tanggal Konsultasi</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

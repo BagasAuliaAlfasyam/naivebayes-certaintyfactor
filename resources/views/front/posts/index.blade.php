@@ -9,7 +9,7 @@
     <div class="pattern-layer" style="background-image: url({{ asset('assets/frontend') }}/images/shape/pattern-18.png);"></div>
     <div class="auto-container">
         <div class="content-box">
-            <h1>Blog Expert System</h1>
+            <h1>Blog Sistem Pakar</h1>
             <ul class="bread-crumb clearfix">
                 <li><a href="/">Home</a></li>
                 <li>Blog</li>
@@ -28,7 +28,7 @@
                 <div class="blog-grid-content">
 
                     @foreach ($posts as $post)
-                        
+
                         <div class="news-block-one wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
                             <div class="inner-box">
                                 <div class="image-holder">
@@ -61,10 +61,10 @@
                     <div class="mt-5">
                         {{ $posts->links('pagination::simple-tailwind') }}
                     </div>
-                    
+
                 </div>
             </div>
-            
+
             @include('front.posts.partials.component')
 
         </div>
