@@ -18,17 +18,20 @@ class SettingsController extends Controller
         return view('users.settings.profile');
     }
 
-    public function profileUpdate(Request $request, User $user)
+    public function profileUpdate(Request $request)
     {
         $request->validate([
             'username' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi file gambar
         ]);
 
-        if ($request->hasFile('image')) {
-            $filename = $request->image->getClientOriginalName();
+        $user = Auth::user();
 
-            if (Storage::disk('public')->exists('users/' . $user->image)) {
+        if ($request->hasFile('image')) {
+            $filename = time() . '.' . $request->image->extension();
+
+            if ($user->image && Storage::disk('public')->exists('users/' . $user->image)) {
                 if ($user->image !== 'default.jpg') {
                     Storage::disk('public')->delete('users/' . $user->image);
                 }
@@ -36,10 +39,10 @@ class SettingsController extends Controller
 
             $request->image->storeAs('users', $filename, 'public');
         } else {
-            $filename = Auth::user()->image;
+            $filename = $user->image;
         }
 
-        User::where('id', Auth::user()->id)->update([
+        $user->update([
             'username' => Str::slug($request->username),
             'name' => $request->name,
             'image' => $filename
@@ -61,7 +64,7 @@ class SettingsController extends Controller
             'password_confirmation' => ['required', 'same:new_password'],
         ]);
 
-        User::find(Auth::user()->id)->update([
+        Auth::user()->update([
             'password' => Hash::make($request->new_password)
         ]);
 

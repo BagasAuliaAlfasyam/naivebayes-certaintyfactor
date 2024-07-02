@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Aturan')
 
 @section('content')
 <div class="breadcrumb">

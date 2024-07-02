@@ -1,16 +1,16 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Aturan')
 
 @section('content')
 <div class="breadcrumb">
-    <h1>Update Rules</h1>
+    <h1>Perbarui Aturan</h1>
 </div>
 <div class="separator-breadcrumb border-top"></div>
 
 <div class="row">
     <div class="col-md-6">
-        <p>Update Data Rule</p>
+        <p>Perbarui Data Aturan</p>
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex flex-column">
@@ -40,8 +40,8 @@
                             <input type="text" class="form-control @error('probability') is-invalid @enderror" id="probability" name="probability" value="{{ $rule->probability }}">
                             @error('probability') <small class="form-text text-danger">{{ $message }}</small> @enderror
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Update</button>
+
+                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Perbarui Data</button>
                     </form>
                 </div>
             </div>

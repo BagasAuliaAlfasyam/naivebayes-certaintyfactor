@@ -1,16 +1,16 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Penyakit')
 
 @section('content')
 <div class="breadcrumb">
-    <h1>Edit Penyakit</h1>
+    <h1>Perbarui Penyakit</h1>
 </div>
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
 
 <div class="row">
     <div class="col-md-8">
-        <p>Edit Data Penyakit</p>
+        <p>Perbarui Data Penyakit</p>
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex flex-column">
@@ -63,7 +63,7 @@
                                 </div>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Update</button>
+                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Ubah Data</button>
                     </form>
                 </div>
             </div>

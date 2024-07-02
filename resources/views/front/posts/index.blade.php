@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Blogs | Sistem Pakar Diagnosa Penyakit Ginjal')
+@section('title', 'Blogs | Sistem Pakar Diagnosa Penyakit Udang Vaname')
 
 @section('content')
 

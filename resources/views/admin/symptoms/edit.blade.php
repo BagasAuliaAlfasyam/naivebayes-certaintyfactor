@@ -1,10 +1,10 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Gejala')
 
 @section('content')
 <div class="breadcrumb">
-    <h1>Update Gejala</h1>
+    <h1>Perbarui Gejala</h1>
 </div>
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
 

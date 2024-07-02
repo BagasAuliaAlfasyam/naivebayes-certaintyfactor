@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Sistem Pakar Diagnosa Penyakit Ginjal')
+@section('title', 'Sistem Pakar Diagnosa Penyakit Udang Vaname')
 
 @section('content')
 
@@ -9,7 +9,7 @@
     <div class="pattern-layer" style="background-image: url(assets/images/shape/pattern-2.png)"></div>
     <div class="auto-container">
         <div class="content-box">
-            <h1>Sistem Pakar Diagnosa Penyakit Ginjal Dengan Menggunakan Algoritma Bayes</h1>
+            <h1>Sistem Pakar Diagnosa Penyakit Udang Vaname Dengan Menggunakan Algoritma Bayes</h1>
             <div class="image-box">
             <div class="pattern-layer" style="background-image: url({{ asset('assets/frontend') }}/images/shape/pattern-9.png);"></div>
                 <figure class="image image-1"><img src="{{ asset('assets/frontend') }}/images/banner/banner-2-1.png" alt=""></figure>
@@ -61,7 +61,7 @@
                             <i class="flaticon-tools-and-utensils"></i>
                         </div>
                         <h3><a href="index-2.html">Sistem Pakar</a></h3>
-                        <p>Membantu Memprediksi Objek penyakit Ginjal dengan AI dibidang Computer Science, serta dapat diakses kapanpun.</p>
+                        <p>Membantu Memprediksi Objek penyakit Udang Vaname dengan AI dibidang Computer Science, serta dapat diakses kapanpun.</p>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'About | Sistem Pakar Diagnosa Penyakit Ginjal')
+@section('title', 'About | Sistem Pakar Diagnosa Penyakit Udang Vaname')
 
 @section('content')
 
@@ -36,7 +36,7 @@
                     <div class="content-box">
                         <div class="sec-title wow slideInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
                             <p>About</p>
-                            <h2>Kami menyediakan solusi diagnosa penyakit ginjal</h2>
+                            <h2>Kami menyediakan solusi diagnosa penyakit Udang Vaname</h2>
                         </div>
                         <div class="text wow slideInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
                             <p>Diagnosis cepat dan akurat adalah landasan Identifikasi perawatan kesehatan dan BioTech modern. Di Era Digital Ahli patologi dan BioTechnology membutuhkan analisis bantuan mesin untuk mengimbangi laju kerja yang semakin cepat. Kami menghadirkan TeleLaboratory dengan dukungan Kecerdasan Buatan untuk diagnostik yang cepat dan akurat dari pihak pengguna .</p>
@@ -70,7 +70,7 @@
                     <h3>Our Vision</h3>
                     <div class="text">
                         <ul class="list-item">
-                            <li>Mendiagnosa Penyakit Ginjal</li>
+                            <li>Mendiagnosa Penyakit Udang Vaname</li>
                             <li>Bekerja Dengan Cepat</li>
                         </ul>
                     </div>

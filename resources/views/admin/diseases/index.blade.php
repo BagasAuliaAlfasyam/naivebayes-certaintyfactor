@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Penyakit')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/plugins/datatables.min.css" />
@@ -9,7 +9,7 @@
 @section('content')
     <div class="breadcrumb">
         <h1>Penyakit</h1>
-        <a href="{{ route('admin.diseases.create') }}" class="btn btn-primary btn-sm ml-2">Create</a>
+        <a href="{{ route('admin.diseases.create') }}" class="btn btn-primary btn-m ml-4">Tambah Data</a>
     </div>
     <div class="separator-breadcrumb border-top"></div>
 
@@ -18,19 +18,19 @@
             <div class="card text-left">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Data Penyakit</h4>
-                    <p>Sistem pakar diagnosa penyakit ginjal</p>
+                    <p>Sistem pakar diagnosa penyakit Udang Vaname</p>
                     <div class="table-responsive">
                         <table class="display table table-striped table-bordered" id="zero_configuration_table"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Probability</th>
-                                    <th>Appear</th>
-                                    <th>Image</th>
-                                    <th>Actions</th>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Probabilitas</th>
+                                    <th>Jumlah Muncul</th>
+                                    <th>Gambar</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,14 +43,14 @@
                                         <td>{{ $disease->appear }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-info btn-sm" data-toggle="modal"
-                                                data-target="#imageModal{{ $disease->id }}">Show Image</button>
+                                                data-target="#imageModal{{ $disease->id }}">Lihat Gambar</button>
                                             <div class="modal fade" id="imageModal{{ $disease->id }}" tabindex="-1"
                                                 aria-labelledby="imageModalLabel{{ $disease->id }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
-                                                                id="imageModalLabel{{ $disease->id }}">Images for
+                                                                id="imageModalLabel{{ $disease->id }}">Gambar
                                                                 {{ $disease->name }}</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">

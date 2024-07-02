@@ -18,7 +18,7 @@
         <div class="card text-left">
             <div class="card-body">
                 <h4 class="card-title mb-3">Tag Post</h4>
-                <p>Sistem pakar diagnosa penyakit ginjal</p>
+                <p>Sistem pakar diagnosa penyakit Udang Vaname</p>
                 <div class="table-responsive">
                     <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                         <thead>

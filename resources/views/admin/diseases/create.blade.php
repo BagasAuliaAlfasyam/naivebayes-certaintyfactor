@@ -1,10 +1,10 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Penyakit')
 
 @section('content')
 <div class="breadcrumb">
-    <h1>Create Penyakit</h1>
+    <h1>Tambah Penyakit</h1>
 </div>
 <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
 
@@ -51,7 +51,7 @@
                             <input class="form-control @error('images') is-invalid @enderror" name="images[]" id="images" type="file" multiple>
                             @error('images') <small class="form-text text-danger">{{ $message }}</small> @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Create</button>
+                        <button type="submit" class="btn btn-primary pd-x-20 mt-2">Tambah Data</button>
                     </form>
                 </div>
             </div>

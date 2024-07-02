@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Beranda Gejala')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/plugins/datatables.min.css" />
@@ -9,7 +9,7 @@
 @section('content')
     <div class="breadcrumb">
         <h1>Gejala | </h1>
-        <a href="/admin/symptoms/create" class="btn btn-primary btn-sm">Create</a>
+        <a href="/admin/symptoms/create" class="btn btn-primary btn-m ml-3">Tambah Data</a>
     </div>
     <div class="separator-breadcrumb border-top"></div>
 
@@ -18,18 +18,18 @@
             <div class="card text-left">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Data Gejala</h4>
-                    <p>Sistem pakar diagnosa penyakit ginjal</p>
+                    <p>Sistem pakar diagnosa penyakit Udang Vaname</p>
                     <div class="table-responsive">
                         <table class="display table table-striped table-bordered" id="zero_configuration_table"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Actions</th>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Tanggal Buat</th>
+                                    <th>Tanggal Diperbarui</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
