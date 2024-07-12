@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Temporary extends Model
 {
-    protected $fillable = ['symptom_id'];
+    protected $fillable = ['symptom_id', 'cf_user'];
 
 }

@@ -78,7 +78,7 @@ Route::group(
         Route::patch('/updatePassword', [SettingsUser::class, 'updatePassword'])->name('users.updatePassword');
 
         Route::get('/diagnosis', [DiagnosisController::class, 'index'])->name('users.diagnosis');
-        Route::post('/diagnosis/proccess', [DiagnosisController::class, 'proccess'])->name('diagnosis.proccess');
+        Route::post('/diagnosis/proccess', [DiagnosisController::class, 'process'])->name('diagnosis.proccess');
         Route::get('/diagnosis/results', [DiagnosisController::class, 'results'])->name('diagnosis.results');
 
         Route::get('/consultations', [ConsultationController::class, 'usersConsultations'])->name('consultations');

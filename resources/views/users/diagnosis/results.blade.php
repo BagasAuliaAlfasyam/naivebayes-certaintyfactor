@@ -40,7 +40,7 @@
                                 <p class="m-0 fw-bold fs-4">Certainty Factor</p>
                                 @if ($diagnosisMax)
                                     <p class="m-0">{{ $diagnosisMax->name }}</p>
-                                    <h4 class="heading">{{ floor($diagnosisMax->cf_gejala * 100) }}%</h4>
+                                    <h4 class="heading">{{ floor($diagnosisMax->cf_combine * 100) }}%</h4>
                                 @else
                                     <p class="m-0">No diagnosis available</p>
                                 @endif
@@ -132,7 +132,7 @@
                                         <td>{{ $diagnosa->code }}</td>
                                         <td>{{ $diagnosa->name }}</td>
                                         <td>{{ floor($diagnosa->results * 100) }}%</td>
-                                        <td>{{ floor($diagnosa->cf_gejala * 100) }}%</td>
+                                        <td>{{ floor($diagnosa->cf_combine * 100) }}%</td>
                                     </tr>
                                 @endforeach
                             </tbody>

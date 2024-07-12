@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('symptom_id');
             $table->double('probability');
             $table->double('cf_gejala');
+            $table->float('cf_combine')->nullable();
             $table->double('results');
             $table->timestamps();
         });

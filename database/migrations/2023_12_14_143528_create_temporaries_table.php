@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('symptom_id');
             $table->foreign('symptom_id')->references('id')->on('symptoms');
+            $table->decimal('cf_user', 4, 2)->default(0); // Menambahkan kolom cf_user dengan tipe data decimal
             $table->timestamps();
         });
     }

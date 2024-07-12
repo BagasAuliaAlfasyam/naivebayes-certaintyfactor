@@ -37,7 +37,7 @@ class RulesTableSeeder extends Seeder
                     $cf = $probability; // Menambahkan nilai CF yang sama dengan probabilitas
                 } else {
                     $probability = 0.01; // Probabilitas untuk gejala yang tidak terkait dengan penyakit
-                    $cf = $probability; // Menambahkan nilai CF yang sama dengan probabilitas
+                    $cf = 0; // Menambahkan nilai CF yang sama dengan probabilitas
                 }
 
                 DB::table('rules')->insert([

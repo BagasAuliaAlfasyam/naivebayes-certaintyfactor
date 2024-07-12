@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Users;
 
 use App\Models\Consultation;
@@ -11,13 +12,14 @@ use App\Models\TemporaryFinal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DiagnosisController extends Controller
 {
     public function index()
     {
-        $symtoms = Symptom::all();
-        return view('users.diagnosis.index', compact('symtoms'));
+        $symptoms = Symptom::all();
+        return view('users.diagnosis.index', compact('symptoms'));
     }
 
     private function getProbDisease($diseaseId)
@@ -37,27 +39,73 @@ class DiagnosisController extends Controller
         TemporaryFinal::where('disease_id', $diseaseId)->update(['results' => $probability]);
     }
 
-    public function proccess(Request $request)
+    private function getCFCombine($diseaseId, $temporaryFinals)
     {
-        Temporary::query()->truncate();
-        TemporaryFinal::query()->truncate();
+        $cfCombine = 0;
+        $uniqueSymptomIds = [];
+
+        $filteredTemporaries = $temporaryFinals->where('disease_id', $diseaseId);
+
+        foreach ($filteredTemporaries as $temp) {
+            if (!in_array($temp['symptom_id'], $uniqueSymptomIds)) {
+                $uniqueSymptomIds[] = $temp['symptom_id'];
+                $cfCombine += $temp['cf_gejala'] * (1 - $cfCombine);
+                Log::info("CF Combine untuk Disease ID $diseaseId: $cfCombine");
+            } else {
+                Log::warning('Duplikasi ditemukan untuk symptom_id ' . $temp['symptom_id'] . ' pada Disease ID ' . $diseaseId);
+            }
+        }
+
+        // Simpan cfCombine ke tabel TemporaryFinal
+        TemporaryFinal::where('disease_id', $diseaseId)->update(['cf_combine' => $cfCombine]);
+
+        return $cfCombine;
+    }
+
+
+    public function process(Request $request)
+    {
+        Log::info('Memulai proses diagnosa');
+
+        Temporary::truncate();
+        TemporaryFinal::truncate();
+
+        $request->validate([
+            'symptoms' => 'required|array',
+            'symptoms.*' => 'exists:symptoms,id',
+            'cf_user' => 'required|array',
+        ]);
 
         $symptoms = $request->symptoms; // Gejala yang dipilih
         $cfUserValues = $request->cf_user; // Nilai CF user yang dipilih
 
-        // Menyimpan gejala yang dipilih ke tabel Temporary
-        foreach ($symptoms as $symptomId) {
-            Temporary::create(['symptom_id' => $symptomId]);
+        Log::info('Gejala yang dipilih: ' . json_encode($symptoms));
+        Log::info('Nilai CF User: ' . json_encode($cfUserValues));
+
+        // Menyimpan gejala yang dipilih beserta cf_user ke tabel Temporary
+        // Menyimpan gejala yang dipilih ke tabel Temporary bersama dengan cf_user
+        // Process symptoms and cf_user
+        foreach ($request->input('symptoms') as $symptomId) {
+            $cfUser = $request->input('cf_user.' . $symptomId, 0); // Default to 0 if not found
+            Temporary::create([
+                'symptom_id' => $symptomId,
+                'cf_user' => $cfUser,
+            ]);
         }
 
         // Mengambil data dari tabel rules dengan join tabel temporaries
-        $temporaryFinals = Rule::join('temporaries', 'rules.symptom_id', '=', 'temporaries.symptom_id')
-            ->select('rules.disease_id', 'rules.symptom_id', 'rules.probability', 'rules.cf_pakar')
+        // Mengambil data dari tabel rules dengan join tabel temporaries hanya untuk gejala yang dipilih
+        $temporaryFinals = Rule::join('temporaries', function ($join) {
+            $join->on('rules.symptom_id', '=', 'temporaries.symptom_id')->whereIn('temporaries.symptom_id', request()->input('symptoms'));
+        })
+            ->select('rules.disease_id', 'rules.symptom_id', 'rules.probability', 'rules.cf_pakar', 'temporaries.cf_user')
             ->orderBy('rules.symptom_id', 'asc')
             ->get()
-            ->map(function ($qtf) use ($cfUserValues) {
-                $cfUser = $cfUserValues[$qtf->symptom_id] ?? 0;
-                $cfGejala = min($cfUser, $qtf->cf_pakar);
+            ->map(function ($qtf) {
+                $cfGejala = $qtf->cf_pakar * $qtf->cf_user;
+
+                Log::info('Menggabungkan CF untuk symptom_id ' . $qtf->symptom_id);
+                Log::info('CF Pakar: ' . $qtf->cf_pakar . ', CF User: ' . $qtf->cf_user . ', CF Gejala: ' . $cfGejala);
 
                 return [
                     'disease_id' => $qtf->disease_id,
@@ -72,84 +120,59 @@ class DiagnosisController extends Controller
 
         $probabilities = [];
         $cfCombines = [];
-        for ($i = 1; $i <= 10; $i++) {
-            $probabilities[$i] = $this->getProbDisease($i);
-            $cfCombines[$i] = $this->getCFCombine($i, $temporaryFinals);
+
+        // Hitung probabilitas dan CF combine hanya untuk penyakit yang relevan
+        foreach ($temporaryFinals->groupBy('disease_id') as $diseaseId => $filteredTemporaries) {
+            $probabilities[$diseaseId] = $this->getProbDisease($diseaseId);
+            Log::info("Menghitung CF Combine untuk Disease ID: $diseaseId");
+            $cfCombines[$diseaseId] = $this->getCFCombine($diseaseId, $filteredTemporaries);
         }
+        // dd($cfCombines);
 
         $totalProbability = array_sum($probabilities);
 
+        // Normalisasi probabilitas
         foreach ($probabilities as $key => $value) {
             $probabilities[$key] = $value / $totalProbability;
             $this->resultProbDisease($key, $probabilities[$key]);
         }
 
-        $diagnosisMax = TemporaryFinal::join(
-            'diseases',
-            'temporary_finals.disease_id', '=', 'diseases.id')
-            ->select([
-                DB::raw('MAX(temporary_finals.id) as id'),
-                DB::raw('MAX(results) as results'),
-                'diseases.*',
-                DB::raw('MAX(cf_gejala) as cf_percentage')])
-            ->groupBy('diseases.id')
-            ->orderByDesc('results')
-            ->limit(1)
-            ->get();
+        // Ambil diagnosis maksimum berdasarkan hasil TemporaryFinal
+        $diagnosisMax = TemporaryFinal::join('diseases', 'temporary_finals.disease_id', '=', 'diseases.id')
+        ->select([DB::raw('MAX(temporary_finals.id) as id'), DB::raw('MAX(results) as results'), 'diseases.*', DB::raw('MAX(cf_combine) as cf_percentage')])
+        ->groupBy('diseases.id')
+        ->orderByDesc('cf_percentage')
+        ->first();
 
-        foreach ($diagnosisMax as $diagnosis) {
+        // Simpan hasil diagnosa ke dalam konsultasi
+        if ($diagnosisMax) {
             Consultation::create([
                 'user_id' => Auth::user()->id,
-                'disease' => $diagnosis->name,
-                'score' => floor($diagnosis->results * 100),
-                'information' => $diagnosis->information,
-                'suggestion' => $diagnosis->suggestion,
-                'cf_percentage' => floor($diagnosis->cf_percentage * 100),
+                'disease' => $diagnosisMax->name,
+                'score' => floor($diagnosisMax->results * 100),
+                'information' => $diagnosisMax->information,
+                'suggestion' => $diagnosisMax->suggestion,
+                'cf_percentage' => floor($diagnosisMax->cf_percentage * 100),
             ]);
         }
 
         return redirect('/users/diagnosis/results')->with('toast_success', Auth::user()->name . ' Berhasil Mendiagnosa');
     }
 
-    private function getCFCombine($diseaseId, $temporaryFinals)
-    {
-        $cfCombine = 0;
-        $temporaryFinals->where('disease_id', $diseaseId)->each(function ($temp) use (&$cfCombine) {
-            $cfCombine += $temp['cf_gejala'] * (1 - $cfCombine);
-        });
-        return $cfCombine;
-    }
-
     public function results()
     {
-        $diagnosis = DB::table('temporary_finals')
-        ->join('diseases', 'temporary_finals.disease_id', '=', 'diseases.id')
-        ->select('temporary_finals.disease_id', 'temporary_finals.results', 'diseases.*', 'temporary_finals.cf_gejala')
-        ->orderByDesc('temporary_finals.results')
-        ->limit(10)
-        ->get();
-
+        // Ambil 10 diagnosis teratas
+        $diagnosis = TemporaryFinal::join('diseases', 'temporary_finals.disease_id', '=', 'diseases.id')->select('temporary_finals.disease_id', 'temporary_finals.results', 'diseases.*', 'temporary_finals.cf_combine')->orderByDesc('temporary_finals.results')->limit(10)->get();
+        // dd($diagnosis);
+        // Ambil diagnosis maksimum untuk tampilan detail
         $diagnosisMax = Disease::with('imageDiseases')
-    ->join('temporary_finals', 'diseases.id', '=', 'temporary_finals.disease_id')
-    ->select([
-        'diseases.id',
-        'diseases.name',
-        'diseases.information',
-        'diseases.suggestion',
-        'temporary_finals.created_at',
-        DB::raw('MAX(temporary_finals.results) AS results'),
-        DB::raw('MAX(temporary_finals.cf_gejala) AS cf_gejala')
-    ])
-    ->groupBy([
-        'diseases.id',
-        'diseases.name',
-        'diseases.information',
-        'diseases.suggestion',
-        'temporary_finals.created_at'
-    ])
-    ->orderByDesc('results')
-    ->first();
+            ->join('temporary_finals', 'diseases.id', '=', 'temporary_finals.disease_id')
+            ->select(['diseases.id', 'diseases.name', 'diseases.information', 'diseases.suggestion', 'temporary_finals.created_at', DB::raw('MAX(temporary_finals.results) AS results'), DB::raw('MAX(temporary_finals.cf_combine) AS cf_combine')])
+            ->groupBy(['diseases.id', 'diseases.name', 'diseases.information', 'diseases.suggestion', 'temporary_finals.created_at'])
+            ->orderByDesc('results')
+            ->first();
 
+            // dd($diagnosisMax);
         return view('users.diagnosis.results', compact('diagnosis', 'diagnosisMax'));
     }
 }
