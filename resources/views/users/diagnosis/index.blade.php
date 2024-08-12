@@ -59,24 +59,7 @@
                                     <label class="ml-3">
                                         <input type="radio" name="cf_user[{{ $symptom->id }}]" value="0"> Tidak
                                         tahu
-                                    </label><br>
-                                    <label class="ml-3">
-                                        <input type="radio" name="cf_user[{{ $symptom->id }}]" value="-0.4"> Mungkin
-                                        tidak
-                                    </label><br>
-                                    <label class="ml-3">
-                                        <input type="radio" name="cf_user[{{ $symptom->id }}]" value="-0.6">
-                                        Kemungkinan besar tidak
-                                    </label><br>
-                                    <label class="ml-3">
-                                        <input type="radio" name="cf_user[{{ $symptom->id }}]" value="-0.8"> Hampir
-                                        pasti tidak
-                                    </label><br>
-                                    <label class="ml-3">
-                                        <input type="radio" name="cf_user[{{ $symptom->id }}]" value="-1.0"> Pasti
-                                        tidak
                                     </label>
-
                                 </div>
                             </div>
                         </div>
